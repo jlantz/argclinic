@@ -39,3 +39,38 @@ ArgClinic aims to revolutionize how debaters construct, analyze, and share argum
 5. Research aggregation and summarization
 
 ## 🚀 Getting Started
+
+### Using Codespaces or Copilot Workspaces
+
+To run your own instance of ArgClinic using Codespaces or Copilot Workspaces, follow these steps:
+
+1. **Fork the Repository**: Start by forking the ArgClinic repository to your own GitHub account.
+
+2. **Open in Codespaces or Copilot Workspaces**: Navigate to your forked repository and click on the "Code" button. Select "Open with Codespaces" or "Open with Copilot Workspaces".
+
+3. **Set Environment Variables**: You will need to set the following environment variables to run the application:
+   - `AI_ENGINE_ENDPOINT`: The endpoint for the AI engine.
+   - `CONTEXT_TYPE`: The context type for the AI engine (e.g., "debate").
+   - `CERTAINTY_THRESHOLD`: The certainty threshold for argument validation.
+
+   You can set these environment variables in the `.env` file in the root of the project. Here is an example of what the `.env` file might look like:
+
+   ```
+   AI_ENGINE_ENDPOINT=http://localhost:3000/api/ai
+   CONTEXT_TYPE=debate
+   CERTAINTY_THRESHOLD=0.75
+   ```
+
+4. **Run the Application**: Once the environment variables are set, you can run the application using the following command:
+
+   ```
+   npm run dev
+   ```
+
+   This will start the development server and you can access the application at `http://localhost:3000`.
+
+5. **Debugging**: You can use the built-in debugging tools in Codespaces or Copilot Workspaces to debug the application. The repository includes a `.vscode/launch.json` file with configurations for debugging the Next.js application and the AI argument parser.
+
+6. **Contributing**: If you make improvements or fixes, consider contributing back to the main repository by opening a pull request.
+
+Happy debating!
