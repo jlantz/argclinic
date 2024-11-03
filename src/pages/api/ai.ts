@@ -1,4 +1,3 @@
-// ai.ts
 import axios from 'axios';
 
 export interface AIResponse {
@@ -6,6 +5,14 @@ export interface AIResponse {
 }
 
 export async function getAIResponse(prompt: string): Promise<AIResponse> {
+  // Check for required environment variables
+  const requiredEnvVars = ['ANTHROPIC_API_KEY', 'MAX_TOKENS_TO_SAMPLE'];
+  for (const envVar of requiredEnvVars) {
+    if (!process.env[envVar]) {
+      throw new Error(`Environment variable ${envVar} is not set. Please set it in the .env file.`);
+    }
+  }
+
   try {
     const anthropicResponse = await axios.post(
       'https://api.anthropic.com/v1/complete',

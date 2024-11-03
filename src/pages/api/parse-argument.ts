@@ -31,6 +31,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
+  // Check for required environment variables
+  const requiredEnvVars = ['ANTHROPIC_API_KEY', 'MAX_TOKENS_TO_SAMPLE'];
+  for (const envVar of requiredEnvVars) {
+    if (!process.env[envVar]) {
+      return res.status(500).json({
+        error: `Environment variable ${envVar} is not set. Please set it in the .env file.`,
+      });
+    }
+  }
+
   try {
     const prompt = `Analyze this debate argument in relation to the resolution, using standard debate terminology and logical analysis. Provide specific reasons for each score.
 
