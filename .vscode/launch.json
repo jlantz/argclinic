@@ -1,0 +1,84 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Next.js",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev"
+        },
+        {
+            "name": "Debug Tests",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/jest",
+            "args": [
+                "--runInBand",
+                "--watchAll=false"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Debug AI Argument Parser",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "node",
+            "program": "${workspaceRoot}/src/ai/parser.js",
+            "env": {
+                "AI_ENGINE_ENDPOINT": "http://localhost:3000/api/ai",
+                "CONTEXT_TYPE": "debate",
+                "CERTAINTY_THRESHOLD": "0.75"
+            },
+            "args": [
+                "--parseMode=aresr",
+                "--includeEvidence=true",
+                "--contextAware=true"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Debug AI Argument Parser - Judging",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "node",
+            "program": "${workspaceRoot}/src/ai/parser.js",
+            "env": {
+                "AI_ENGINE_ENDPOINT": "http://localhost:3000/api/ai",
+                "CONTEXT_TYPE": "judging",
+                "CERTAINTY_THRESHOLD": "0.75"
+            },
+            "args": [
+                "--parseMode=aresr",
+                "--includeEvidence=true",
+                "--contextAware=true"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Debug AI Argument Parser - Retro",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "node",
+            "program": "${workspaceRoot}/src/ai/parser.js",
+            "env": {
+                "AI_ENGINE_ENDPOINT": "http://localhost:3000/api/ai",
+                "CONTEXT_TYPE": "retro",
+                "CERTAINTY_THRESHOLD": "0.75"
+            },
+            "args": [
+                "--parseMode=aresr",
+                "--includeEvidence=true",
+                "--contextAware=true"
+            ],
+            "cwd": "${workspaceRoot}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}
