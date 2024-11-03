@@ -1,5 +1,5 @@
 {
   "tasks": {
-    "launch": "nvm install && nvm use && npm install && npm run dev"
+    "launch": "npm install && npm run dev"
   }
 }
