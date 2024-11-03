@@ -1,4 +1,3 @@
-// parse-argument.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getAIResponse } from '../../utils/ai'; // Update import path
 import { Argument, ParsedArgumentsResponse } from '../../types/argument';
@@ -59,7 +58,8 @@ Return a JSON object with this exact structure:
       "eStrength": "strength description",
       "sStrength": "strength description",
       "rWeakness": "weakness description"
-    }
+    },
+    "tagline": "summary of the argument"
   }]
 }`;
 

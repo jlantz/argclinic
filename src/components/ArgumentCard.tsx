@@ -36,7 +36,26 @@ export const ArgumentCard: React.FC<Props> = ({
   onSave,
   isFiltered = false
 }) => {
-  // ...existing useState and renderContext code...
+  const [showContext, setShowContext] = useState(false);
+
+  const renderContext = () => {
+    if (!argument.context) return null;
+    const { text, startIndex, endIndex } = argument.context;
+    const before = text.slice(0, startIndex);
+    const highlighted = text.slice(startIndex, endIndex);
+    const after = text.slice(endIndex);
+
+    return (
+      <div className="p-4 bg-gray-100 rounded-lg mt-4">
+        <h5 className="font-bold">Context</h5>
+        <p>
+          {before}
+          <span className="bg-yellow-200">{highlighted}</span>
+          {after}
+        </p>
+      </div>
+    );
+  };
 
   return (
     <div className={`p-4 rounded-lg border ${

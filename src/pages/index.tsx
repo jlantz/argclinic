@@ -46,7 +46,6 @@ export default function Home() {
   };
 
   const [isLoading, setIsLoading] = useState(false);
-  const [relevanceThreshold, setRelevanceThreshold] = useState(0.6);
   const [showFilteredArguments, setShowFilteredArguments] = useState(false);
   const [argumentGroups, setArgumentGroups] = useState<ArgumentGroup[]>([]);
   const [filteredArguments, setFilteredArguments] = useState<Argument[]>([]);
@@ -58,7 +57,7 @@ export default function Home() {
     const filtered: Argument[] = [];
 
     args.forEach(arg => {
-      if (arg.relevance >= relevanceThreshold) {
+      if (arg.relevance >= 0.6) {
         if (!groups[arg.topic]) {
           groups[arg.topic] = {
             topic: arg.topic,
@@ -347,44 +346,307 @@ ${counterArg.evidence.map(ev => `- ${ev.content} (${ev.source}, ${ev.date})`).jo
         <Tabs.Content value="LD">
           <h2 className="text-2xl font-semibold mb-4">LD Debate Arguments</h2>
           {/* Similar structure for LD */}
+          <div className="mb-4 flex items-center space-x-2">
+            <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
+              Resolution
+            </span>
+            <select
+              value={isNewResolution ? 'other' : resolutionInput}
+              onChange={(e) => {
+                if (e.target.value === 'other') {
+                  setIsNewResolution(true);
+                  setResolutionInput('');
+                } else {
+                  setIsNewResolution(false);
+                  setResolutionInput(e.target.value);
+                  setNewResolution('');
+                }
+              }}
+              className="flex-1 p-2 border rounded"
+            >
+              <option value="">Select a resolution...</option>
+              {resolutions[activeFormat].map((res, index) => (
+                <option key={index} value={res}>{res}</option>
+              ))}
+              <option value="other">Other</option>
+            </select>
+            {isNewResolution && (
+              <input
+                type="text"
+                value={newResolution}
+                onChange={(e) => setNewResolution(e.target.value)}
+                className="flex-1 p-2 border rounded"
+                placeholder="Enter a new resolution..."
+              />
+            )}
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="p-2 border rounded"
+              placeholder="Start Date"
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="p-2 border rounded"
+              placeholder="End Date"
+            />
+          </div>
+          <div className="mb-4">
+            <textarea
+              value={argumentInput}
+              onChange={(e) => {
+                setArgumentInput(e.target.value);
+                setFieldErrors(prev => ({ ...prev, text: '' }));
+              }}
+              className={`w-full p-2 border rounded ${
+                fieldErrors.text ? 'border-red-500' : ''
+              }`}
+              placeholder="Enter your arguments here..."
+            />
+            {fieldErrors.text && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.text}</p>
+            )}
+            <button 
+              onClick={handleParseArgument} 
+              disabled={isLoading}
+              className={`mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${
+                isLoading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+            >
+              {isLoading ? 'Processing...' : 'Parse Arguments'}
+            </button>
+          </div>
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          {Object.entries(fieldErrors).map(([field, error]) => (
+            <p key={field} className="text-red-500 text-sm mt-1">
+              {error}
+            </p>
+          ))}
+          {isLoading && <LoadingSpinner />}
+          {parsedArguments.length > 0 && (
+            <div className="mt-4">
+              <h3 className="text-2xl font-semibold mb-2">Parsed ARESR Arguments</h3>
+              {parsedArguments.map((arg) => (
+                <div key={arg.id} className="mb-8 p-6 border rounded-lg shadow-lg bg-white">
+                  <ArgumentAssessment 
+                    argument={arg}
+                    category={argumentCategories[arg.id]}
+                    debateThread={debateThreads[arg.id]}
+                    onCreateCounter={() => handleCreateCounterArgument(arg)}
+                    onEdit={() => handleEditArgument(arg)}
+                    onSave={() => handleSaveMarkdown(arg)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </Tabs.Content>
         <Tabs.Content value="Public Forum">
           <h2 className="text-2xl font-semibold mb-4">Public Forum Debate Arguments</h2>
           {/* Similar structure for Public Forum */}
+          <div className="mb-4 flex items-center space-x-2">
+            <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
+              Resolution
+            </span>
+            <select
+              value={isNewResolution ? 'other' : resolutionInput}
+              onChange={(e) => {
+                if (e.target.value === 'other') {
+                  setIsNewResolution(true);
+                  setResolutionInput('');
+                } else {
+                  setIsNewResolution(false);
+                  setResolutionInput(e.target.value);
+                  setNewResolution('');
+                }
+              }}
+              className="flex-1 p-2 border rounded"
+            >
+              <option value="">Select a resolution...</option>
+              {resolutions[activeFormat].map((res, index) => (
+                <option key={index} value={res}>{res}</option>
+              ))}
+              <option value="other">Other</option>
+            </select>
+            {isNewResolution && (
+              <input
+                type="text"
+                value={newResolution}
+                onChange={(e) => setNewResolution(e.target.value)}
+                className="flex-1 p-2 border rounded"
+                placeholder="Enter a new resolution..."
+              />
+            )}
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="p-2 border rounded"
+              placeholder="Start Date"
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="p-2 border rounded"
+              placeholder="End Date"
+            />
+          </div>
+          <div className="mb-4">
+            <textarea
+              value={argumentInput}
+              onChange={(e) => {
+                setArgumentInput(e.target.value);
+                setFieldErrors(prev => ({ ...prev, text: '' }));
+              }}
+              className={`w-full p-2 border rounded ${
+                fieldErrors.text ? 'border-red-500' : ''
+              }`}
+              placeholder="Enter your arguments here..."
+            />
+            {fieldErrors.text && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.text}</p>
+            )}
+            <button 
+              onClick={handleParseArgument} 
+              disabled={isLoading}
+              className={`mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${
+                isLoading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+            >
+              {isLoading ? 'Processing...' : 'Parse Arguments'}
+            </button>
+          </div>
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          {Object.entries(fieldErrors).map(([field, error]) => (
+            <p key={field} className="text-red-500 text-sm mt-1">
+              {error}
+            </p>
+          ))}
+          {isLoading && <LoadingSpinner />}
+          {parsedArguments.length > 0 && (
+            <div className="mt-4">
+              <h3 className="text-2xl font-semibold mb-2">Parsed ARESR Arguments</h3>
+              {parsedArguments.map((arg) => (
+                <div key={arg.id} className="mb-8 p-6 border rounded-lg shadow-lg bg-white">
+                  <ArgumentAssessment 
+                    argument={arg}
+                    category={argumentCategories[arg.id]}
+                    debateThread={debateThreads[arg.id]}
+                    onCreateCounter={() => handleCreateCounterArgument(arg)}
+                    onEdit={() => handleEditArgument(arg)}
+                    onSave={() => handleSaveMarkdown(arg)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </Tabs.Content>
         <Tabs.Content value="MSPDP">
           <h2 className="text-2xl font-semibold mb-4">MSPDP Debate Arguments</h2>
           {/* Similar structure for MSPDP */}
+          <div className="mb-4 flex items-center space-x-2">
+            <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
+              Resolution
+            </span>
+            <select
+              value={isNewResolution ? 'other' : resolutionInput}
+              onChange={(e) => {
+                if (e.target.value === 'other') {
+                  setIsNewResolution(true);
+                  setResolutionInput('');
+                } else {
+                  setIsNewResolution(false);
+                  setResolutionInput(e.target.value);
+                  setNewResolution('');
+                }
+              }}
+              className="flex-1 p-2 border rounded"
+            >
+              <option value="">Select a resolution...</option>
+              {resolutions[activeFormat].map((res, index) => (
+                <option key={index} value={res}>{res}</option>
+              ))}
+              <option value="other">Other</option>
+            </select>
+            {isNewResolution && (
+              <input
+                type="text"
+                value={newResolution}
+                onChange={(e) => setNewResolution(e.target.value)}
+                className="flex-1 p-2 border rounded"
+                placeholder="Enter a new resolution..."
+              />
+            )}
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="p-2 border rounded"
+              placeholder="Start Date"
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="p-2 border rounded"
+              placeholder="End Date"
+            />
+          </div>
+          <div className="mb-4">
+            <textarea
+              value={argumentInput}
+              onChange={(e) => {
+                setArgumentInput(e.target.value);
+                setFieldErrors(prev => ({ ...prev, text: '' }));
+              }}
+              className={`w-full p-2 border rounded ${
+                fieldErrors.text ? 'border-red-500' : ''
+              }`}
+              placeholder="Enter your arguments here..."
+            />
+            {fieldErrors.text && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.text}</p>
+            )}
+            <button 
+              onClick={handleParseArgument} 
+              disabled={isLoading}
+              className={`mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${
+                isLoading ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+            >
+              {isLoading ? 'Processing...' : 'Parse Arguments'}
+            </button>
+          </div>
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          {Object.entries(fieldErrors).map(([field, error]) => (
+            <p key={field} className="text-red-500 text-sm mt-1">
+              {error}
+            </p>
+          ))}
+          {isLoading && <LoadingSpinner />}
+          {parsedArguments.length > 0 && (
+            <div className="mt-4">
+              <h3 className="text-2xl font-semibold mb-2">Parsed ARESR Arguments</h3>
+              {parsedArguments.map((arg) => (
+                <div key={arg.id} className="mb-8 p-6 border rounded-lg shadow-lg bg-white">
+                  <ArgumentAssessment 
+                    argument={arg}
+                    category={argumentCategories[arg.id]}
+                    debateThread={debateThreads[arg.id]}
+                    onCreateCounter={() => handleCreateCounterArgument(arg)}
+                    onEdit={() => handleEditArgument(arg)}
+                    onSave={() => handleSaveMarkdown(arg)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </Tabs.Content>
       </Tabs.Root>
-
-      {/* Add threshold control */}
-      <div className="mb-4 flex items-center gap-4">
-        <label className="flex items-center gap-2">
-          <span>Relevance Threshold:</span>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.1"
-            value={relevanceThreshold}
-            onChange={(e) => {
-              setRelevanceThreshold(parseFloat(e.target.value));
-              groupArguments(parsedArguments);
-            }}
-            className="w-32"
-          />
-          <span>{(relevanceThreshold * 100).toFixed(0)}%</span>
-        </label>
-        <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={showFilteredArguments}
-            onChange={(e) => setShowFilteredArguments(e.target.checked)}
-          />
-          <span>Show Filtered Arguments</span>
-        </label>
-      </div>
 
       {/* Display grouped arguments */}
       {argumentGroups.map((group) => (
