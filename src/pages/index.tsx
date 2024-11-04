@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import { Argument, DebateFormat, ParsedArgumentsResponse, ArgumentGroup } from '../types/argument';
 import axios from 'axios';
@@ -219,6 +219,37 @@ ${counterArg.evidence.map(ev => `- ${ev.content} (${ev.source}, ${ev.date})`).jo
       setIsLoading(false);
     }
   };
+
+  // Fetch current topics from data.json
+  const [currentTopics, setCurrentTopics] = useState<Record<DebateFormat, string>>({
+    Policy: '',
+    LD: '',
+    'Public Forum': '',
+    MSPDP: ''
+  });
+
+  useEffect(() => {
+    const fetchCurrentTopics = async () => {
+      try {
+        const response = await axios.get('/data/topics.json');
+        const topicsData = response.data;
+
+        const topics: Record<DebateFormat, string> = {
+          Policy: topicsData.policy.currentTopic,
+          LD: topicsData.ld.currentTopic,
+          'Public Forum': topicsData.pf.currentTopic,
+          MSPDP: topicsData.mspdp.currentTopic
+        };
+
+        setCurrentTopics(topics);
+        setResolutionInput(topics[activeFormat]);
+      } catch (error) {
+        console.error('Error fetching current topics:', error);
+      }
+    };
+
+    fetchCurrentTopics();
+  }, [activeFormat]);
 
   return (
     <main className="container mx-auto p-4">

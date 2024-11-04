@@ -58,3 +58,8 @@ export interface Argument {
 export interface ParsedArgumentsResponse {
   arguments: Argument[];
 }
+
+export interface DebateFormat {
+  currentTopic: string;
+  defaultTopic: string;
+}
