@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { text, format, resolution, startDate, endDate } = req.body;
+  const { text, format, resolution, startDate, endDate, side } = req.body;
 
   // Enhanced input validation
   if (!text?.trim()) {
@@ -45,6 +45,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
+  if (!side?.trim()) {
+    return res.status(400).json({ 
+      error: 'Please specify the side (Aff or Neg)',
+      field: 'side'
+    });
+  }
+
   // Check for required environment variables
   const requiredEnvVars = ['ANTHROPIC_API_KEY', 'MAX_TOKENS_TO_SAMPLE'];
   for (const envVar of requiredEnvVars) {
@@ -73,6 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 Resolution: ${resolution}
 Format: ${format}
+Side: ${side}
 Argument Text: ${text}
 
 Return a JSON object with this exact structure:
