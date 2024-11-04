@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { text, format, resolution } = req.body;
+  const { text, format, resolution, startDate, endDate } = req.body;
 
   // Enhanced input validation
   if (!text?.trim()) {
@@ -28,6 +28,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ 
       error: 'Please select or enter a resolution',
       field: 'resolution'
+    });
+  }
+
+  if (!startDate?.trim()) {
+    return res.status(400).json({ 
+      error: 'Please enter a start date',
+      field: 'startDate'
+    });
+  }
+
+  if (!endDate?.trim()) {
+    return res.status(400).json({ 
+      error: 'Please enter an end date',
+      field: 'endDate'
     });
   }
 
@@ -82,7 +96,9 @@ Return a JSON object with this exact structure:
       "sStrength": "strength description",
       "rWeakness": "weakness description"
     },
-    "tagline": "summary of the argument"
+    "tagline": "summary of the argument",
+    "startDate": "${startDate}",
+    "endDate": "${endDate}"
   }]
 }`;
 
