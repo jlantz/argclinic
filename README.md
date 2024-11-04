@@ -94,7 +94,9 @@ The structure of `data.json` has been reviewed for use in topics. The `data/topi
         "start_date": "2024-09-01",
         "end_date": "2025-05-31",
         "selected": true,
-        "slug": "usfg-ipr-protection"
+        "slug": "usfg-ipr-protection",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       }
     ]
   },
@@ -107,84 +109,108 @@ The structure of `data.json` has been reviewed for use in topics. The `data/topi
         "start_date": "2024-11-01",
         "end_date": "2024-12-31",
         "selected": false,
-        "slug": "us-nuclear-incentives"
+        "slug": "us-nuclear-incentives",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States ought to adopt a wealth tax.",
         "start_date": "2024-11-01",
         "end_date": "2024-12-31",
         "selected": true,
-        "slug": "us-wealth-tax"
+        "slug": "us-wealth-tax",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The Commonwealth of Australia ought to establish an Indigenous Voice to Parliament.",
         "start_date": "2024-11-01",
         "end_date": "2024-12-31",
         "selected": false,
-        "slug": "australia-indigenous-voice"
+        "slug": "australia-indigenous-voice",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States ought to formally recognize one or more of the following: Iraqi Kurdistan, the Republic of China, the Republic of Somaliland.",
         "start_date": "2025-01-01",
         "end_date": "2025-02-28",
         "selected": false,
-        "slug": "us-recognition"
+        "slug": "us-recognition",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States ought to remove all or nearly all of its economic sanctions on one or more of the following: Islamic Republic of Iran, Democratic People’s Republic of Korea, Bolivarian Republic of Venezuela.",
         "start_date": "2025-01-01",
         "end_date": "2025-02-28",
         "selected": false,
-        "slug": "us-sanctions-removal"
+        "slug": "us-sanctions-removal",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States ought to become party to the United Nations Convention on the Law of the Sea and/or the Rome Statute of the International Criminal Court.",
         "start_date": "2025-01-01",
         "end_date": "2025-02-28",
         "selected": false,
-        "slug": "us-un-conventions"
+        "slug": "us-un-conventions",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "Social media ought to be regulated as a public utility.",
         "start_date": "2025-03-01",
         "end_date": "2025-04-30",
         "selected": false,
-        "slug": "social-media-regulation"
+        "slug": "social-media-regulation",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The development of Artificial General Intelligence is immoral.",
         "start_date": "2025-03-01",
         "end_date": "2025-04-30",
         "selected": false,
-        "slug": "agi-immorality"
+        "slug": "agi-immorality",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States ought to ban non-therapeutic human genetic engineering.",
         "start_date": "2025-03-01",
         "end_date": "2025-04-30",
         "selected": false,
-        "slug": "us-genetic-engineering-ban"
+        "slug": "us-genetic-engineering-ban",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "Violent revolution is a just response to political oppression.",
         "start_date": "2025-05-01",
         "end_date": "2025-05-31",
         "selected": false,
-        "slug": "violent-revolution"
+        "slug": "violent-revolution",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "A just society ought to prefer social ownership to private ownership.",
         "start_date": "2025-05-01",
         "end_date": "2025-05-31",
         "selected": false,
-        "slug": "social-ownership"
+        "slug": "social-ownership",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States ought to enact electoral reform that replaces the plurality voting system in federal elections.",
         "start_date": "2025-05-01",
         "end_date": "2025-05-31",
         "selected": false,
-        "slug": "us-electoral-reform"
+        "slug": "us-electoral-reform",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       }
     ]
   },
@@ -197,91 +223,117 @@ The structure of `data.json` has been reviewed for use in topics. The `data/topi
         "start_date": "2024-09-01",
         "end_date": "2024-10-31",
         "selected": true,
-        "slug": "usfg-surveillance"
+        "slug": "usfg-surveillance",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United Mexican States should substantially increase private sector participation in its energy industry.",
         "start_date": "2024-09-01",
         "end_date": "2024-10-31",
         "selected": false,
-        "slug": "mexico-energy-participation"
+        "slug": "mexico-energy-participation",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States should substantially reduce its military support of Taiwan.",
         "start_date": "2024-11-01",
         "end_date": "2024-12-31",
         "selected": true,
-        "slug": "us-taiwan-military-support"
+        "slug": "us-taiwan-military-support",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States federal government should eliminate its intercontinental ballistic missiles.",
         "start_date": "2024-11-01",
         "end_date": "2024-12-31",
         "selected": false,
-        "slug": "usfg-icbm-elimination"
+        "slug": "usfg-icbm-elimination",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The East African Community Partner States should establish the East African Federation.",
         "start_date": "2025-01-01",
         "end_date": "2025-01-31",
         "selected": false,
-        "slug": "east-african-federation"
+        "slug": "east-african-federation",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The African Union should grant diplomatic recognition to the Republic of Somaliland as an independent state.",
         "start_date": "2025-01-01",
         "end_date": "2025-01-31",
         "selected": false,
-        "slug": "somaliland-recognition"
+        "slug": "somaliland-recognition",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States should accede to the Rome Statute of the International Criminal Court.",
         "start_date": "2025-02-01",
         "end_date": "2025-02-28",
         "selected": false,
-        "slug": "us-rome-statute"
+        "slug": "us-rome-statute",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "International financial institutions should cancel all outstanding public debt from fossil fuel projects in low- and middle-income countries (LIMC).",
         "start_date": "2025-02-01",
         "end_date": "2025-02-28",
         "selected": false,
-        "slug": "fossil-fuel-debt-cancellation"
+        "slug": "fossil-fuel-debt-cancellation",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "In the United States, the benefits of the use of generative artificial intelligence in education outweigh the harms.",
         "start_date": "2025-03-01",
         "end_date": "2025-03-31",
         "selected": false,
-        "slug": "ai-education-benefits"
+        "slug": "ai-education-benefits",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States federal government should ban corporate acquisition of single-family residences.",
         "start_date": "2025-03-01",
         "end_date": "2025-03-31",
         "selected": false,
-        "slug": "usfg-corporate-housing-ban"
+        "slug": "usfg-corporate-housing-ban",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States federal government should eliminate its agricultural subsidies for domestic corn production.",
         "start_date": "2025-04-01",
         "end_date": "2025-04-30",
         "selected": false,
-        "slug": "usfg-corn-subsidies"
+        "slug": "usfg-corn-subsidies",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "The United States federal government should substantially increase its investment in domestic nuclear energy.",
         "start_date": "2025-04-01",
         "end_date": "2025-04-30",
         "selected": false,
-        "slug": "usfg-nuclear-investment"
+        "slug": "usfg-nuclear-investment",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       },
       {
         "topic": "Potential topics will be available in April 2025.",
         "start_date": "2025-05-01",
         "end_date": "2025-05-31",
         "selected": false,
-        "slug": "potential-topics-april-2025"
+        "slug": "potential-topics-april-2025",
+        "aff_prompt": "Provide the strongest initial or additional arguments on Affirmative (Aff) for this topic.",
+        "neg_prompt": "Provide the strongest initial or additional arguments on Negative (Neg) for this topic."
       }
     ]
   }
