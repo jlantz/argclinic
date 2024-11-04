@@ -106,7 +106,7 @@ export default function Home() {
       setErrorMessage(null);
       setFieldErrors({});
 
-      const resolutionToUse = isNewResolution ? newResolution : resolutionInput;
+      const resolutionToUse = isNewResolution ? newResolution : resolutionInput || currentTopics[activeFormat];
       const response = await axios.post<ParsedArgumentsResponse>('/api/parse-argument', { 
         text: argumentInput,
         format: activeFormat,
