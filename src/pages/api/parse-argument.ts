@@ -1,4 +1,3 @@
-// parse-argument.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getAIResponse } from '../../utils/ai'; // Update import path
 import { Argument, ParsedArgumentsResponse } from '../../types/argument';
@@ -32,6 +31,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
+  // Check for required environment variables
+  const requiredEnvVars = ['ANTHROPIC_API_KEY', 'MAX_TOKENS_TO_SAMPLE'];
+  for (const envVar of requiredEnvVars) {
+    if (!process.env[envVar]) {
+      return res.status(500).json({
+        error: `Environment variable ${envVar} is not set. Please set it in the .env file.`,
+      });
+    }
+  }
+
+  // Detect if running in a Codespace and use GitHub Codespace Secrets instructions if so
+  const isCodespace = process.env.CODESPACES === 'true';
+  if (isCodespace) {
+    const codespaceEnvVars = ['GITHUB_CODESPACE_SECRET_ANTHROPIC_API_KEY', 'GITHUB_CODESPACE_SECRET_MAX_TOKENS_TO_SAMPLE'];
+    for (const envVar of codespaceEnvVars) {
+      if (!process.env[envVar]) {
+        return res.status(500).json({
+          error: `Environment variable ${envVar} is not set. Please set it in the GitHub Codespace Secrets.`,
+        });
+      }
+    }
+  }
+
   try {
     const prompt = `Analyze this debate argument in relation to the resolution, using standard debate terminology and logical analysis. Provide specific reasons for each score.
 
@@ -59,7 +81,8 @@ Return a JSON object with this exact structure:
       "eStrength": "strength description",
       "sStrength": "strength description",
       "rWeakness": "weakness description"
-    }
+    },
+    "tagline": "summary of the argument"
   }]
 }`;
 

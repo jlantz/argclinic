@@ -1,4 +1,3 @@
-// ai.ts
 import axios from 'axios';
 
 export interface AIResponse {
@@ -6,6 +5,24 @@ export interface AIResponse {
 }
 
 export async function getAIResponse(prompt: string): Promise<AIResponse> {
+  // Check for required environment variables
+  const requiredEnvVars = ['ANTHROPIC_API_KEY', 'MAX_TOKENS_TO_SAMPLE'];
+  for (const envVar of requiredEnvVars) {
+    if (!process.env[envVar]) {
+      throw new Error(`Environment variable ${envVar} is not set. Please set it in the .env file.`);
+    }
+  }
+
+  // Detect if running in a Codespace and use GitHub Codespace Secrets instructions if so
+  if (process.env.CODESPACES) {
+    const codespaceEnvVars = ['GITHUB_CODESPACE_SECRET_ANTHROPIC_API_KEY', 'GITHUB_CODESPACE_SECRET_MAX_TOKENS_TO_SAMPLE'];
+    for (const envVar of codespaceEnvVars) {
+      if (!process.env[envVar]) {
+        throw new Error(`Environment variable ${envVar} is not set. Please set it in the GitHub Codespace Secrets.`);
+      }
+    }
+  }
+
   try {
     const anthropicResponse = await axios.post(
       'https://api.anthropic.com/v1/complete',
