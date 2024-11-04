@@ -2,6 +2,9 @@
 
 An open-source platform for debate argument crafting, analysis, and collaboration.
 
+The name, a reference to Monty Python's skit The Argument Clinic. The inspiration, a lifetime as a former debater now engineer, and a dad with a son now in debate:
+https://muselab.com/bench-notes/foster-a-culture-of-debate-in-engineering-teams
+
 ## 🎓 Vision
 
 ArgClinic aims to revolutionize how debaters construct, analyze, and share arguments across different debate formats. By leveraging modern web technologies and AI integration, we're building a collaborative platform where the debate community can:
