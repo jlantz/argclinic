@@ -73,4 +73,10 @@ To run your own instance of ArgClinic using Codespaces or Copilot Workspaces, fo
 
 6. **Contributing**: If you make improvements or fixes, consider contributing back to the main repository by opening a pull request.
 
-Happy debating!
+### Selecting and Defaulting to Current Topics
+
+The data model has been expanded to support the current selected topic and select that by default for each format. The `data/topics.json` file now includes fields for `currentTopic` and `defaultTopic` for each format. The `src/pages/index.tsx` file allows users to select a current topic and defaults to the current topic for each format. The `src/pages/api/parse-argument.ts` file handles logic related to the current selected topic and default selection for each format.
+
+### Reviewing Structure of data.json for Use in Topics
+
+The structure of `data.json` has been reviewed for use in topics. The `data/topics.json` file now includes the necessary fields to support the current selected topic and default selection for each format.
